@@ -16,6 +16,7 @@ let lastName = "Amouyal" // string
 let age = 36 // number
 let email = "galamouyal88@gmail.com" //string
 let isLecture = true // boolean
+let isWorking = true
 let gender
 
 var city = "ashdod" // Dont use Var use let
