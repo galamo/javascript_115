@@ -40,3 +40,4 @@ Write in JS the following exercises:
 3. hint: use prompt, while and extra parameters
 
 
+
