@@ -8,7 +8,6 @@ const MAX_PRODUCTS = 3
 let counter = 1;
 let maxProductName;
 let maxProductPrice = 0;
-
 let maxProductsNames = [];
 
 
