@@ -7,7 +7,7 @@
 
 
 # Ex 2
-Create Function that receive product name, price & id.
+Create Function that receive product name, price & id from user prompt
 the function will print the product as object
 ```javascript
 {
