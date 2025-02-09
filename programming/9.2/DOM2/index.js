@@ -16,17 +16,21 @@ function loadTable() {
             th.innerText = fields[index].replaceAll("_", " ")
             theadTr.append(th)
         }
+        theadTr.append(getTD("Actions", "", "th"))
     }
     const tBody = document.getElementById("table-cars-body")
     if (tBody) {
         for (let index = 0; index < carsForRental.length; index++) {
             const currentCar = carsForRental[index];
             const tr = document.createElement("tr")
+            tr.id = `${currentCar.Name.replaceAll(" ", "-")}-${index}`
             for (let index = 0; index < fields.length; index++) {
                 const currentField = fields[index];
                 tr.append(getTD(currentCar[currentField], "-"))
-
             }
+
+            const tdButton = getTdButton()
+            tr.append(tdButton)
             tBody.append(tr)
             // tr.append(getTD(currentCar.Name),
             //     getTD(currentCar.Miles_per_Gallon, 0),
@@ -44,9 +48,22 @@ function loadTable() {
 
 
 }
+function getTdButton() {
+    const button = document.createElement("button")
+    button.classList.add("btn", "btn-danger")
 
-function getTD(value, defaultValue = "") {
-    const currentTD = document.createElement("td")
+    const icon = `<i class="bi bi-trash3"></i>`
+    button.innerHTML = icon
+
+    button.onclick = function () {
+        console.log(this.parentElement.parentElement.remove())
+    }
+    const tdButton = document.createElement("td")
+    tdButton.append(button)
+    return tdButton
+}
+function getTD(value, defaultValue = "", type = "td") {
+    const currentTD = document.createElement(type)
     currentTD.innerHTML = value || defaultValue
     return currentTD
 }
