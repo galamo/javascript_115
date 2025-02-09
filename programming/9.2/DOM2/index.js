@@ -1,51 +1,3 @@
-let tableContent = `  <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td id="markCell">Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>`
-
-
-let more3Rows = `
-                        <tr>
-                            <th scope="row">1</th>
-                            <td id="markCell">Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>`
-
 
 function clearTable() {
     document.getElementById("table-cars-headers").innerHTML = ""
@@ -70,21 +22,33 @@ function loadTable() {
         for (let index = 0; index < carsForRental.length; index++) {
             const currentCar = carsForRental[index];
             const tr = document.createElement("tr")
+            for (let index = 0; index < fields.length; index++) {
+                const currentField = fields[index];
+                tr.append(getTD(currentCar[currentField], "-"))
 
-            const tdName = document.createElement("td")
-            tdName.innerText = currentCar.Name
-
-
-            const tdMPG = document.createElement("td")
-            tdMPG.innerText = currentCar.Miles_per_Gallon || 0
-
-
-            tr.append(tdName, tdMPG)
+            }
             tBody.append(tr)
+            // tr.append(getTD(currentCar.Name),
+            //     getTD(currentCar.Miles_per_Gallon, 0),
+            //     getTD(currentCar.Cylinders),
+            //     getTD(currentCar.Displacement),
+            //     getTD(currentCar.Acceleration),
+            //     getTD(currentCar.Weight_in_lbs),
+            //     getTD(currentCar.Horsepower, 999),
+            //     getTD(currentCar.Year, "2000-04-04"),
+            //     getTD(currentCar.Origin, "ISRAEL")
+            // )
+
         }
     }
 
 
+}
+
+function getTD(value, defaultValue = "") {
+    const currentTD = document.createElement("td")
+    currentTD.innerHTML = value || defaultValue
+    return currentTD
 }
 
 

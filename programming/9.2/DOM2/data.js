@@ -76,7 +76,6 @@ const carsForRental = [
         "Horsepower": 140,
         "Weight_in_lbs": 3449,
         "Acceleration": 10.5,
-        "Year": "1970-01-01",
         "Origin": "USA"
     },
     {
@@ -87,7 +86,6 @@ const carsForRental = [
         "Horsepower": 198,
         "Weight_in_lbs": 4341,
         "Acceleration": 10,
-        "Year": "1970-01-01",
         "Origin": "USA"
     },
     {
@@ -98,7 +96,6 @@ const carsForRental = [
         "Horsepower": 220,
         "Weight_in_lbs": 4354,
         "Acceleration": 9,
-        "Year": "1970-01-01",
         "Origin": "USA"
     },
     {
