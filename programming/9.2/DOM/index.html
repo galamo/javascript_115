@@ -16,6 +16,9 @@
         <h1>Cars </h1>
         <button onclick="deleteTable()" class="btn btn-danger"> Delete Table </button>
         <button onclick="loadTable()" class="btn btn-primary"> Load Table </button>
+        <button onclick="addMoreRows()" class="btn btn-primary"> Add more rows </button>
+
+
         <div class="row">
 
             <div>
@@ -28,7 +31,7 @@
                             <th scope="col">Handle</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="table-body">
                         <tr>
                             <th scope="row">1</th>
                             <td id="markCell">Mark</td>
