@@ -58,7 +58,7 @@ function getTdButton() {
     button.innerHTML = icon
 
     button.onclick = function () {
-        console.log(this.parentElement.parentElement.remove())
+        this.parentElement.parentElement.remove()
     }
     const tdButton = document.createElement("td")
     tdButton.append(button)
