@@ -1,7 +1,8 @@
 let productsArray = products.products
+
 function init() {
     document.getElementById("loadProductsButton")?.addEventListener("click", function () {
-        loadCards(productsArray)
+        loadCards(products.products)
     })
 }
 init();
@@ -15,8 +16,27 @@ function getCardTemplate(id, description, title, image, price) {
                 <h3> <button class="btn btn-danger" onClick="deleteMe(${id})"> Delete </button> </h3>
                 </div>`
 }
-
-function deleteMe(id) { // 
+function deleteMultipleNEWJS(arrayOfIds) {
+    // document.getElementById(id)?.remove() // NO DONT DEL FROM DOM
+    const newArrayWithoutDeletedId = []
+    for (let index = 0; index < productsArray.length; index++) {
+        if (!arrayOfIds.includes(productsArray[index].id.toString())) {
+            newArrayWithoutDeletedId.push(productsArray[index])
+        }
+    }
+    productsArray = newArrayWithoutDeletedId
+    loadCards(productsArray)
+}
+function deleteMeNEWJS(id) {
+    const deletedIndex = productsArray.findIndex(function (currentProduct) {
+        return currentProduct.id.toString() === id.toString()
+    })
+    if (deletedIndex !== -1) {
+        productsArray.splice(deletedIndex, 1)
+    }
+    loadCards(productsArray)
+}
+function deleteMe(id) {
     // document.getElementById(id)?.remove() // NO DONT DEL FROM DOM
     const newArrayWithoutDeletedId = []
     for (let index = 0; index < productsArray.length; index++) {
@@ -26,9 +46,7 @@ function deleteMe(id) { //
     }
     productsArray = newArrayWithoutDeletedId
     loadCards(productsArray)
-
 }
-
 function loadCards(arrayOfProducts) {
     if (!Array.isArray(arrayOfProducts)) return; // validate that arrayOfCars is array
     if (arrayOfProducts.length === 0) return; // validate that there is data inside the array
