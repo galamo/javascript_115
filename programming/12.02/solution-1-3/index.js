@@ -1,12 +1,35 @@
+function init() {
+    document.getElementById("loadCarsRentButton")?.addEventListener("click", function () {
+        loadTable(carsForRental)
+    })
+    document.getElementById("loadCarsSaleButton")?.addEventListener("click", function () {
+        loadTable(carsForSale)
+    })
+
+    document.getElementById("loadAllCarsButton")?.addEventListener("click", function () {
+        // loadTable([...carsForRental, ...carsForSale])
+        const all = carsForRental.concat(carsForSale)
+        loadTable(all)
+    })
+
+}
+
+init();
+
+
 
 function clearTable() {
     document.getElementById("table-cars-headers").innerHTML = ""
+    document.getElementById("table-cars-body").innerHTML = ""
+
 }
 
-function loadTable() {
+function loadTable(arrayOfCars) {
+    if (!Array.isArray(arrayOfCars)) return; // validate that arrayOfCars is array
+    if (arrayOfCars.length === 0) return; // validate that there is data inside the array
     clearTable()
-    const firstElement = carsForRental[0]
-    const fields = Object.keys(firstElement)
+    const firstElement = arrayOfCars[0]
+    const fields = Object.keys(firstElement).sort()
     console.log(firstElement)
     console.log(fields)
     const theadTr = document.getElementById("table-cars-headers")
@@ -20,8 +43,8 @@ function loadTable() {
     }
     const tBody = document.getElementById("table-cars-body")
     if (tBody) {
-        for (let index = 0; index < carsForRental.length; index++) {
-            const currentCar = carsForRental[index];
+        for (let index = 0; index < arrayOfCars.length; index++) {
+            const currentCar = arrayOfCars[index];
             const tr = document.createElement("tr")
             tr.id = `${currentCar.Name.replaceAll(" ", "-")}-${index}`
             for (let index = 0; index < fields.length; index++) {
