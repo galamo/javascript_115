@@ -1,10 +1,34 @@
+const DOM_IDS = {
+    Horsepower: "Horsepower",
+    Acceleration: "Acceleration",
+    Name: "Name",
+}
+const allCars = carsForRental.concat(carsForSale)
 const DOM = {
     searchButton: document.getElementById("searchCars"),
     searchInput: document.getElementById("searchValue"),
-    selectOptionKey: document.getElementById("keySelect")
+    selectOptionKey: document.getElementById("keySelect"),
+    newCarForm: {
+        name: document.getElementById(DOM_IDS.Name),
+        horsePowerInput: document.getElementById(DOM_IDS.Horsepower),
+        acceleration: document.getElementById(DOM_IDS.Acceleration),
+        newCarButton: document.getElementById("newCarButton")
+    }
 }
 
+
 function init() {
+
+    DOM.newCarForm.newCarButton.addEventListener("click", function () {
+        const newCar = {
+            [DOM_IDS.Horsepower]: +DOM.newCarForm.horsePowerInput.value,
+            [DOM_IDS.Acceleration]: +DOM.newCarForm.acceleration.value,
+            [DOM_IDS.Name]: DOM.newCarForm.name.value
+        }
+        allCars.push(newCar)
+        loadTable(allCars)
+    })
+
     DOM.selectOptionKey.addEventListener("change", function () {
         validateButtonDisabled(this.value, DOM.searchInput.value, DOM.searchButton)
     })
@@ -14,7 +38,7 @@ function init() {
     DOM.searchButton?.addEventListener("click", function () {
         const value = document.getElementById("searchValue").value
         const key = document.getElementById("keySelect").value
-        const result = searchCars(carsForRental.concat(carsForSale), key, value)
+        const result = searchCars(allCars, key, value)
         loadTable(result)
 
     })
@@ -27,8 +51,8 @@ function init() {
 
     document.getElementById("loadAllCarsButton")?.addEventListener("click", function () {
         // loadTable([...carsForRental, ...carsForSale])
-        const all = carsForRental.concat(carsForSale)
-        loadTable(all)
+
+        loadTable(allCars)
     })
 
 }
