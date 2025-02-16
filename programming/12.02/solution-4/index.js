@@ -73,7 +73,7 @@ function deleteMe(id) {
 }
 function loadCards(arrayOfProducts) {
     if (!Array.isArray(arrayOfProducts)) return; // validate that arrayOfCars is array
-    if (arrayOfProducts.length === 0) return; // validate that there is data inside the array
+    // if (arrayOfProducts.length === 0) return; // validate that there is data inside the array
     const content = document.getElementById("content")
     content.innerHTML = ""
     for (let index = 0; index < arrayOfProducts.length; index++) {
