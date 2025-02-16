@@ -18,10 +18,8 @@ const allCars = carsForRental.concat(carsForSale)
 
 
 function init() {
-    const localStorageSelectedKey = localStorage.getItem("selectOptionKey")
-    if (localStorageSelectedKey) {
-        DOM.selectOptionKey.value = localStorageSelectedKey;
-    }
+    loadDefaultsFromLS()
+
     DOM.newCarForm.newCarButton.addEventListener("click", function () {
         const newCar = {
             [DOM_IDS.Horsepower]: +DOM.newCarForm.horsePowerInput.value,
@@ -39,6 +37,7 @@ function init() {
     })
     DOM.searchInput.addEventListener("change", function () {
         validateButtonDisabled(DOM.selectOptionKey.value, this.value, DOM.searchButton)
+        localStorage.setItem("inputValue", this.value)
     })
     DOM.searchButton?.addEventListener("click", function () {
         const value = document.getElementById("searchValue").value
@@ -61,7 +60,16 @@ function init() {
     })
 
 }
-
+function loadDefaultsFromLS() {
+    const localStorageInputValue = localStorage.getItem("inputValue")
+    if (localStorageInputValue) {
+        DOM.searchInput.value = localStorageInputValue;
+    }
+    const localStorageSelectedKey = localStorage.getItem("selectOptionKey")
+    if (localStorageSelectedKey) {
+        DOM.selectOptionKey.value = localStorageSelectedKey;
+    }
+}
 function searchCars(cars, key, value) {
     if (!key || !value) return;
     if (!Array.isArray(cars)) return
