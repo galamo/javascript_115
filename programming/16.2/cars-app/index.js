@@ -3,7 +3,6 @@ const DOM_IDS = {
     Acceleration: "Acceleration",
     Name: "Name",
 }
-const allCars = carsForRental.concat(carsForSale)
 const DOM = {
     searchButton: document.getElementById("searchCars"),
     searchInput: document.getElementById("searchValue"),
@@ -15,10 +14,14 @@ const DOM = {
         newCarButton: document.getElementById("newCarButton")
     }
 }
+const allCars = carsForRental.concat(carsForSale)
 
 
 function init() {
-
+    const localStorageSelectedKey = localStorage.getItem("selectOptionKey")
+    if (localStorageSelectedKey) {
+        DOM.selectOptionKey.value = localStorageSelectedKey;
+    }
     DOM.newCarForm.newCarButton.addEventListener("click", function () {
         const newCar = {
             [DOM_IDS.Horsepower]: +DOM.newCarForm.horsePowerInput.value,
@@ -31,6 +34,8 @@ function init() {
 
     DOM.selectOptionKey.addEventListener("change", function () {
         validateButtonDisabled(this.value, DOM.searchInput.value, DOM.searchButton)
+        localStorage.setItem("selectOptionKey", this.value)
+
     })
     DOM.searchInput.addEventListener("change", function () {
         validateButtonDisabled(DOM.selectOptionKey.value, this.value, DOM.searchButton)
