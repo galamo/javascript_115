@@ -80,9 +80,12 @@ function getTdButton() {
     const icon = `<i class="bi bi-trash3"></i>`
     button.innerHTML = icon
 
-    button.onclick = function () {
+    // button.onclick = function () {
+    //     console.log(this.parentElement.parentElement.remove())
+    // }
+    button.addEventListener("click", function () {
         console.log(this.parentElement.parentElement.remove())
-    }
+    })
     const tdButton = document.createElement("td")
     tdButton.append(button)
     return tdButton

@@ -21,6 +21,7 @@ function init() {
     loadDefaultsFromLS()
 
     DOM.newCarForm.newCarButton.addEventListener("click", function () {
+
         const newCar = {
             [DOM_IDS.Horsepower]: +DOM.newCarForm.horsePowerInput.value,
             [DOM_IDS.Acceleration]: +DOM.newCarForm.acceleration.value,
