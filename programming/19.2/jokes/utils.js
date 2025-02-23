@@ -64,8 +64,9 @@ function aggregateJokesTypes(arr){
     })
     return stats;
 }
-
+let chart = null
 function loadStatistics(obj, targetContent){
+    console.log("do i call this function?")
     const content = document.querySelector(`#${targetContent}`)
     if(!content) return;
     let labels = []
@@ -79,8 +80,10 @@ function loadStatistics(obj, targetContent){
     }
 
     const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
+    if(chart){
+        chart.destroy()
+    }
+    chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels:labels,
@@ -88,7 +91,6 @@ function loadStatistics(obj, targetContent){
           label: 'Number of jokes',
           data: data,
           borderWidth: 5,
-          backgroundColor:"#548ff54"
         }]
       },
       options: {
