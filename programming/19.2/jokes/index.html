@@ -16,7 +16,15 @@
     <div class="container">
         <h1 id="jokes">Jokes <span id="jokesTotal" > </span></h1>
         <h2> <a href="./favorites.html">Favorites</a> </h2>
-        <div class="row" id="jokesContent" style="gap: 2px;">
+        <div id="stats" style="border: 1px solid black">
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <button id="addSelectedItems" class="btn btn-primary"> Add Selected items</button>
+        </div>
+        <div class="row mt-5" id="jokesContent" style="gap: 2px;">
         </div>
     </div>
 
@@ -25,7 +33,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="./data.js"></script>
     <script src="./utils.js"></script>

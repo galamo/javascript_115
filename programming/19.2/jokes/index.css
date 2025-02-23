@@ -3,3 +3,9 @@
     /* height: 400px !important; */
     text-align: center;
 }
+
+.selectedClass{
+    background-color: yellow !important;
+    border: 2px solid black
+    
+}

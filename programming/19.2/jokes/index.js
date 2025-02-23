@@ -5,10 +5,22 @@
 // } catch (error) {
 //     console.log("we had an error!!!")
 // }
-
+let selectedItems = []
 function init() {
-    loadCards(jokes, "jokesContent")
+
+    document.querySelector("#addSelectedItems").addEventListener("click", function(){
+        selectedItems.forEach(function(jokeId){
+            addToFavorites(jokeId)
+        })
+        selectedItems = []
+        init();
+    })
+
+    loadCards(jokes, "jokesContent", "add", selectedItems)
     loadTotalItems(`${jokes.length}`, "jokesTotal")
+    const result = aggregateJokesTypes(jokes)
+    loadStatistics(result,"stats")
+
 }
 
 
@@ -49,5 +61,13 @@ function alertError() {
     });
 }
 
+function selectItem(id){
+    
+    if(selectedItems.indexOf(Number(id)) === -1){
+        selectedItems.push(id)
+    }
+    init()
+    console.log(selectedItems)
+}
 
 init()
