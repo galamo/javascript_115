@@ -75,7 +75,6 @@ function aggregateJokesTypes(arr){
 }
 let chart = null
 function loadStatistics(obj, targetContent){
-    console.log("do i call this function?")
     const content = document.querySelector(`#${targetContent}`)
     if(!content) return;
     let labels = []

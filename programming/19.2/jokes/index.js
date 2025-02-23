@@ -1,25 +1,27 @@
 
 // THIS ROW IS NOT RELATED TO THE DESTRUCTURING const joke11111 = { "type": "general", "setup": "What do birds give out on Halloween?", "punchline": "Tweets.", "id": 187 }
-// try {
-//     a
-// } catch (error) {
-//     console.log("we had an error!!!")
-// }
+
+
 let selectedItems = []
 function init() {
 
-    document.querySelector("#addSelectedItems").addEventListener("click", function(){
-        selectedItems.forEach(function(jokeId){
+    document.querySelector("#addSelectedItems").addEventListener("click", function () {
+        selectedItems.forEach(function (jokeId) {
             addToFavorites(jokeId)
         })
         selectedItems = []
         init();
     })
 
-    loadCards(jokes, "jokesContent", "add", selectedItems)
-    loadTotalItems(`${jokes.length}`, "jokesTotal")
-    const result = aggregateJokesTypes(jokes)
-    loadStatistics(result,"stats")
+    try {
+        loadCards(jokes, "jokesContent", "add", selectedItems)
+        loadTotalItems(`${jokes.length}`, "jokesTotal")
+        const result = aggregateJokesTypes(jokes)
+        loadStatistics(result, "stats")
+    } catch (error) {
+        console.log(error)
+        alertError("Something went wrong we are working to fix it, please come back later")
+    }
 
 }
 
@@ -31,7 +33,12 @@ function addToFavorites(id) {
     if (jokeToFavorite) {
         const favoritesJokesString = localStorage.getItem("favoritesJokes")  // fetch from LS (get)
         if (favoritesJokesString) {
-            const favoritesJokesArray = JSON.parse(favoritesJokesString) // JSON.parse 
+            let favoritesJokesArray = []
+            try {
+                favoritesJokesArray = JSON.parse(favoritesJokesString)
+            } catch (error) {
+                console.log(error)
+            }
             const found = getJokeObjById(jokeToFavorite.id, favoritesJokesArray)
             if (!found) {
                 favoritesJokesArray.push(jokeToFavorite) // push into array
@@ -54,16 +61,16 @@ function alertSuccess() {
         icon: "success"
     });
 }
-function alertError() {
+function alertError(message = "Already added") {
     Swal.fire({
-        title: "Already added!",
+        title: message,
         icon: "error"
     });
 }
 
-function selectItem(id){
-    
-    if(selectedItems.indexOf(Number(id)) === -1){
+function selectItem(id) {
+
+    if (selectedItems.indexOf(Number(id)) === -1) {
         selectedItems.push(id)
     }
     init()
