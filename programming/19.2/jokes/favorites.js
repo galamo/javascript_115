@@ -2,6 +2,9 @@ function init() {
     const favoritesJokesString = localStorage.getItem("favoritesJokes")
     const favoritesJokesArray = JSON.parse(favoritesJokesString)
     loadCards(favoritesJokesArray, "jokesContentFavorites", "remove")
+    loadTotalItems(`${favoritesJokesArray.length}/100`, "total")
+    const result = aggregateJokesTypes(favoritesJokesArray)
+    // loadStatistics()
 }
 
 init()
@@ -19,6 +22,4 @@ function removeFromFavorites(id) {
         }
 
     }
-
-
 }

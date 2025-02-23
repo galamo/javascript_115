@@ -46,3 +46,23 @@ function getJokeIndexById(id, jokesArray) {
     }
 
 }
+
+function loadTotalItems(total, targetContent)   {
+   const result =  document.querySelector(`#${targetContent}`)
+   result.innerText = total
+}
+
+function aggregateJokesTypes(arr){
+    // validations
+    let stats = {};
+    console.log(11)
+    
+    arr.forEach(function(currentJoke)   {
+        if(stats[currentJoke.type]){ // if true we have something in the object under the relevant key
+            stats[currentJoke.type] = stats[currentJoke.type] + 1
+        }else{
+            stats[currentJoke.type] = 1;
+        }
+    })
+    console.log(stats)
+}

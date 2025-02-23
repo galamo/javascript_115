@@ -1,13 +1,14 @@
 
 // THIS ROW IS NOT RELATED TO THE DESTRUCTURING const joke11111 = { "type": "general", "setup": "What do birds give out on Halloween?", "punchline": "Tweets.", "id": 187 }
-try {
-    a
-} catch (error) {
-    console.log("we had an error!!!")
-}
+// try {
+//     a
+// } catch (error) {
+//     console.log("we had an error!!!")
+// }
 
 function init() {
     loadCards(jokes, "jokesContent")
+    loadTotalItems(`${jokes.length}`, "jokesTotal")
 }
 
 
