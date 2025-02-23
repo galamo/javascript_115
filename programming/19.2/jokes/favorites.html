@@ -17,6 +17,11 @@
 
         <h1 id="favorites">Favorites  <span id="total">  </span> </h1>
         <h2> <a href="./index.html">Jokes</a> </h2>
+        <div id="stats" style="border: 1px solid black">
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
         <div class="row" id="jokesContentFavorites" style="gap: 2px;">
         </div>
 
@@ -25,13 +30,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./data.js"></script>
     <script src="./utils.js"></script>
     <script src="./favorites.js"></script>
+    
 </body>
 
 </html>

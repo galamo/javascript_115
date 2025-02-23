@@ -4,7 +4,7 @@ function init() {
     loadCards(favoritesJokesArray, "jokesContentFavorites", "remove")
     loadTotalItems(`${favoritesJokesArray.length}/100`, "total")
     const result = aggregateJokesTypes(favoritesJokesArray)
-    // loadStatistics()
+    loadStatistics(result,"stats")
 }
 
 init()

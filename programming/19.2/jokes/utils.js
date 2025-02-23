@@ -55,8 +55,6 @@ function loadTotalItems(total, targetContent)   {
 function aggregateJokesTypes(arr){
     // validations
     let stats = {};
-    console.log(11)
-    
     arr.forEach(function(currentJoke)   {
         if(stats[currentJoke.type]){ // if true we have something in the object under the relevant key
             stats[currentJoke.type] = stats[currentJoke.type] + 1
@@ -64,5 +62,41 @@ function aggregateJokesTypes(arr){
             stats[currentJoke.type] = 1;
         }
     })
-    console.log(stats)
+    return stats;
+}
+
+function loadStatistics(obj, targetContent){
+    const content = document.querySelector(`#${targetContent}`)
+    if(!content) return;
+    let labels = []
+    let data = []
+    for(const property in obj){
+        labels.push(property)
+        data.push(obj[property])
+        // const span = document.createElement("h4")
+        // span.innerText = `${property}: ${obj[property]}`
+        // content.appendChild(span)
+    }
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels:labels,
+        datasets: [{
+          label: 'Number of jokes',
+          data: data,
+          borderWidth: 5,
+          backgroundColor:"#548ff54"
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
 }
