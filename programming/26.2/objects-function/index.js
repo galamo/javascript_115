@@ -9,6 +9,7 @@ function Company(_name, _noe, _address) {
     this.details = function () {
         console.log("detailsss", this.address)
     }
+
 }
 
 
@@ -28,8 +29,16 @@ const tomer = {};
 console.log(delete Object.prototype.isPrototypeOf)
 const arr = [1, 2, 3];
 console.log(arr.length)
-console.log(company4.length)
-console.log(Object.keys(company4)) 
+const user = { a: 1 }
+
+Object.prototype.length = function () {
+    return Object.keys(this).length
+}
+console.log(company4.length())
+console.log(user.length())
+
+
+console.log(Object.keys(company4))
 
 // implement the following functionality
-// company4.length => 4 
+// company4.length() => 4 
