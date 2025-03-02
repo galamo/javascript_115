@@ -24,5 +24,5 @@ if (productIndex > -1) data.products.splice(productIndex, 1)
 console.log("singleObject", singleObject)
 
 
-// array of products ids for all the products with price lower than 50
-// array of products return policies for all the products with minimumOrderQuantity > 10
+// array of products ids for all the products with price lower than 50 /map+filter
+// array of products return policies for all the products with minimumOrderQuantity > 10  /map+filter
