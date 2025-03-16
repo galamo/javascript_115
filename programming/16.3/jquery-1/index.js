@@ -8,6 +8,8 @@ $(function () {
     )
     $(".locations-items").css({ color: "red", backgroundColor: "green", fontSize: "20px" })
 
+    $("#main").append($("<div></div>").text("TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"))
+
     $("#add").on("click", function () {
         $("#list-items").append(`<li class='selectMeHover'> ${$("#expenseName").val()} - ${$("#expensePrice").val()}  </li>`)
 
