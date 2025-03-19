@@ -2,7 +2,7 @@
 const productsUrl = "https://dummyjson.com/products"
 function callGetProducts() {
     showLoader(true)
-    fetch(productsUrl).then(async (result) => {
+    fetch(productsUrl).then((result) => { // result = HTTP response object
         result.json().then(data => {
             const products = data.products
             showLoader(false)
@@ -27,7 +27,7 @@ function init() {
 
 function draw(products) {
     const titles = products.map(p => { return `<h2>${p.title}</h2>` })
-    document.querySelector("#content").innerHTML = titles
+    document.querySelector("#content").innerHTML = titles.join("")
 }
 
 init()
