@@ -8,7 +8,7 @@
 
 # Ex - 2 
 1. use the following APi to fetch data to the ui
-2. ps://dummyjson.com/products/search?q=phone
+2. https://dummyjson.com/products/search?q=phone
 3. support input that will add the name of the search query 
 4. draw the result
 5. use loader  
