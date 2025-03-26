@@ -54,8 +54,9 @@ async function showProducts(categoryId) {
         showLoader()
         const fnName = categoryId === "all" ? getAllProducts : getProductsByCategoryApi
         const result = await fnName(categoryId)
-        const productsAvgPrice = getAveragePrice(result)
-        drawStatistics(productsAvgPrice)
+        const productsAvgPrice = getAverageByAttribute(result, "price")
+        const productsRating = getAverageByAttribute(result, "rating")
+        drawStatistics(productsAvgPrice, productsRating)
         draw(result)
     }
     catch {
@@ -93,8 +94,11 @@ function hideLoader() {
 init()
 
 // add new statistics for products: average rating
-function drawStatistics(avg) {
-    DOM.statisticsContent.innerHTML = `<h1>Statistics</h1><h2>Average Price: ${Math.ceil(avg)}</h2>`
+function drawStatistics(avg, averageR) {
+    DOM.statisticsContent.innerHTML = `<h1>Statistics</h1>
+    <h2>Average Price: ${avg}</h2>
+    <h2>Average Rating: ${averageR}</h2>
+    `
 
 }
 
@@ -106,6 +110,25 @@ function getAveragePrice(arr) {
     })
     return sum / arr.length
 }
+
+function getAverageByAttribute(arr, attr) {
+    if (!Array.isArray(arr)) return;
+    let sum = 0;
+    arr.forEach(p => {
+        sum = sum + p[attr]
+    })
+    return Math.ceil(sum / arr.length)
+}
+
+function getCountersByBrand(arr) {
+    // implement counters aggregation
+    // Nike: 2
+    // Puma: 1
+    // Levis: 4
+    // Zara: 2
+}
+
+
 
 
 
