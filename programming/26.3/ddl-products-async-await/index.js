@@ -1,8 +1,10 @@
 const DOM = {
     selectCategory: null,
-    loader: null
+    loader: null,
+    statisticsContent: null
 }
 function init() {
+    DOM.statisticsContent = document.getElementById("stats")
     DOM.selectCategory = document.getElementById("categoriesSelect")
     DOM.loader = document.getElementById("loader")
     DOM.selectCategory.addEventListener("change", function () {
@@ -52,6 +54,8 @@ async function showProducts(categoryId) {
         showLoader()
         const fnName = categoryId === "all" ? getAllProducts : getProductsByCategoryApi
         const result = await fnName(categoryId)
+        const productsAvgPrice = getAveragePrice(result)
+        drawStatistics(productsAvgPrice)
         draw(result)
     }
     catch {
@@ -88,6 +92,19 @@ function hideLoader() {
 }
 init()
 
+function drawStatistics(avg) {
+    DOM.statisticsContent.innerHTML = `<h1>Statistics</h1><h2>Average Price: ${Math.ceil(avg)}</h2>`
+
+}
+
+function getAveragePrice(arr) {
+    if (!Array.isArray(arr)) return;
+    let sum = 0;
+    arr.forEach(p => {
+        sum = sum + p.price
+    })
+    return sum / arr.length
+}
 
 
 
