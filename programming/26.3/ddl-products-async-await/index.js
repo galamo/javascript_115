@@ -13,6 +13,8 @@ function init() {
     getCategoriesApi()
     console.log("after api request")
 }
+
+// split between UI and API logic. showCategories() & getCategoriesApi()
 async function getCategoriesApi() {
     try {
         console.log("before await...")
