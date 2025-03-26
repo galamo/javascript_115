@@ -56,7 +56,8 @@ async function showProducts(categoryId) {
         const result = await fnName(categoryId)
         const productsAvgPrice = getAverageByAttribute(result, "price")
         const productsRating = getAverageByAttribute(result, "rating")
-        drawStatistics(productsAvgPrice, productsRating)
+        const statsByBrand = getCountersByBrand(result)
+        drawStatistics(productsAvgPrice, productsRating, statsByBrand)
         draw(result)
     }
     catch {
@@ -94,12 +95,17 @@ function hideLoader() {
 init()
 
 // add new statistics for products: average rating
-function drawStatistics(avg, averageR) {
+function drawStatistics(avg, averageR, statsByBrand) {
     DOM.statisticsContent.innerHTML = `<h1>Statistics</h1>
     <h2>Average Price: ${avg}</h2>
     <h2>Average Rating: ${averageR}</h2>
     `
-
+    if (Object.keys(statsByBrand).length    ) {
+        DOM.statisticsContent.innerHTML += `<h2> Brand Statistics</h2>`
+        for (key in statsByBrand) {
+            DOM.statisticsContent.innerHTML += `<h3>${key}: ${statsByBrand[key]} </h3>`
+        }
+    }
 }
 
 function getAveragePrice(arr) {
@@ -121,11 +127,24 @@ function getAverageByAttribute(arr, attr) {
 }
 
 function getCountersByBrand(arr) {
+    if (!Array.isArray(arr)) return;
+    let productBrand = {}
+    arr.forEach(p => {
+        if (p.brand) {
+            if (productBrand[p.brand]) {
+                productBrand[p.brand] = productBrand[p.brand] + 1;
+            } else {
+                productBrand[p.brand] = 1;
+            }
+        }
+
+    })
     // implement counters aggregation
     // Nike: 2
     // Puma: 1
     // Levis: 4
     // Zara: 2
+    return productBrand;
 }
 
 
