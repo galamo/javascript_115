@@ -7,9 +7,7 @@ function init() {
     DOM.loader = document.getElementById("loader")
     DOM.selectCategory.addEventListener("change", function () {
         if (this.value === "noValue") return; // clean up dom
-
-        getProductsByCategoryApi(this.value)
-
+        showProducts(this.value)
     })
     console.log("starting the api request.. ")
     getCategoriesApi()
@@ -25,7 +23,6 @@ async function getCategoriesApi() {
     } catch (error) {
         alert("Something went wrong!")
     } finally {
-        // do something anyway sendMtericToServer()
     }
 
 
@@ -39,32 +36,31 @@ function drawCategories(data) {
     })
 }
 
-
-// convert this function to async await instead of using then&catch
-function getProductsByCategoryApi(categoryId) {
-
-    showLoader()
-    fetch(`https://dummyjson.com/products/category/${categoryId}`).then(success).catch(failed).finally(() => {
-        hideLoader()
-    })
-    function success(data) {
-        data.json().then((result) => {
-            draw(result.products)
-        })
+async function showProducts(categoryId) {
+    try {
+        showLoader()
+        const result = await getProductsByCategoryApi(categoryId)
+        draw(result)
     }
-    function failed(error) {
-        console.log(error)
+    catch {
         alert("Something went wrong!")
     }
+    finally {
+        hideLoader()
+        console.log("Finished running this async function :)")
+    }
 }
-
+async function getProductsByCategoryApi(categoryId) {
+    const result = await fetch(`https://dummyjson.com/products/category/${categoryId}`)
+    const data = await result.json()
+    console.log(data.products)
+    return data.products
+}
 function draw(products) {
     // input validation!!!
     const titles = products.map(p => { return `<h2>${p.title}</h2>` })
     document.querySelector("#content").innerHTML = titles.join("")
 }
-
-
 function showLoader() {
     DOM.loader.style.display = "flex"
 }
