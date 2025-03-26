@@ -25,8 +25,9 @@ async function getCategoriesApi() {
     } catch (error) {
         alert("Something went wrong!")
     } finally {
-        // do something anyway
+        // do something anyway sendMtericToServer()
     }
+
 
 }
 function drawCategories(data) {
@@ -39,7 +40,7 @@ function drawCategories(data) {
 }
 
 
-// convert this function to async await instead using then&catch
+// convert this function to async await instead of using then&catch
 function getProductsByCategoryApi(categoryId) {
 
     showLoader()
