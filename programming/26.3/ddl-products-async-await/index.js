@@ -92,6 +92,7 @@ function hideLoader() {
 }
 init()
 
+// add new statistics for products: average rating
 function drawStatistics(avg) {
     DOM.statisticsContent.innerHTML = `<h1>Statistics</h1><h2>Average Price: ${Math.ceil(avg)}</h2>`
 
