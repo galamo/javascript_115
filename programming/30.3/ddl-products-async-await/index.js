@@ -7,7 +7,7 @@ const DOM = {
 
 let currentCurrency = "$"
 let currentCategory = ""
-function init() {e
+function init() {
     DOM.statisticsContent = document.getElementById("stats")
     DOM.selectCategory = document.getElementById("categoriesSelect")
     DOM.loader = document.getElementById("loader")
@@ -18,7 +18,7 @@ function init() {e
         showProducts(currentCategory)
     })
 
-    DOM.selectCategory.addEvntListener("change", function () {
+    DOM.selectCategory.addEventListener("change", function () {
         if (this.value === "noValue") return; // clean up dom
         currentCategory = this.value
         showProducts(this.value)
