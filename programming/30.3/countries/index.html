@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> Countries Flags</h1>
+    <div style="display: flex;justify-content: center;">
+        <select id="countriesSelect">
+            <option value="noValue"> Select Country </option>
+        </select>
+
+
+    </div>
+    <div style="display: flex;justify-content: center;">
+        <div id="loader" style="display: none;" class="loading-wave">
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <div id="countryDetailsContent">
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./utils.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
