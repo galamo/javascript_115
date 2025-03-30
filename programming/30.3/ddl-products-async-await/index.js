@@ -35,7 +35,8 @@ async function showCategories() {
         const result = await getCategoriesApi()
         drawCategories([{ slug: "all", name: "All" }, ...result])
     }
-    catch {
+    catch (ex) {
+        console.log(ex)
         alert("Something went wrong!")
     }
     finally {
@@ -71,10 +72,14 @@ async function showProducts(categoryId) {
         const productsAvgPrice = getAverageByAttribute(result, "price")
         const productsRating = getAverageByAttribute(result, "rating")
         const statsByBrand = getCountersByBrand(result)
+        const returnPolicyAggregation = getReturnPolicyAggregation(result)
         drawStatistics(productsAvgPrice, productsRating, statsByBrand)
+        drawChartReturnPolicy(returnPolicyAggregation)
+        drawChartBrand(statsByBrand)
         draw(result)
     }
-    catch {
+    catch (ex) {
+        console.log(ex)
         alert("Something went wrong!")
     }
     finally {
@@ -102,7 +107,11 @@ async function getProductsApi(url) {
     const result = await fetch(url)
     const data = await result.json()
     return data.products.map(p => {
-        return { title: p.title, brand: p.brand, price: p.price, rating: p.rating, shippingPrice: Math.ceil((p.weight || 1) * 0.5) }
+        return {
+            title: p.title, brand: p.brand, price: p.price,
+            rating: p.rating, shippingPrice: Math.ceil((p.weight || 1) * 0.5),
+            returnPolicy: p?.returnPolicy?.replaceAll(" ", "_")
+        }
     })
 }
 
@@ -174,11 +183,77 @@ function getCountersByBrand(arr) {
     return productBrand;
 }
 
+function getReturnPolicyAggregation(arr) {
+    if (!Array.isArray(arr)) return;
+    let productRP = {}
+    arr.forEach(p => {
+        if (p.returnPolicy) {
+            if (productRP[p.returnPolicy]) {
+                productRP[p.returnPolicy] = productRP[p.returnPolicy] + 1;
+            } else {
+                productRP[p.returnPolicy] = 1;
+            }
+        }
+    })
+    return productRP;
+}
 
 
 
 
 
+function drawChartReturnPolicy(data) {
+    let inlineChart1 = null
+    loadStatistics(data, { id: "returnPolicyChart", label: "counter" }, inlineChart1)
+}
+
+function drawChartBrand(data) {
+    let inlineChart1 = null
+    loadStatistics(data, { id: "brandChart", label: "counter", }, inlineChart1)
+}
+
+
+// 1. aggregation => {key:value}
+// 2. draw chart => [{ key, value }]
+// 3. draw table => [{row: {key, value} }]
+// 4. draw card?! =>..... WTF????
 
 
 
+
+// function getChartObj() {
+
+// }
+
+
+
+function loadStatistics(dataObj, settings, chartContext) {
+    let labels = []
+    let data = []
+    for (const property in dataObj) {
+        labels.push(property)
+        data.push(dataObj[property])
+    }
+    const ctx = document.getElementById(settings.id);
+    if (chartContext) {
+        chartContext.destroy()
+    }
+    chartContext = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: settings.label,
+                data: data,
+                borderWidth: 5,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
