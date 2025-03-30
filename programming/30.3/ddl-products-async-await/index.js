@@ -226,7 +226,7 @@ function drawChartBrand(data) {
 
 const chartsIds = { returnPolicyChart: null, brandChart: null };
 
-function loadStatistics(dataObj, settings, chartContext) {
+function loadStatistics(dataObj, settings) {
 
     let labels = []
     let data = []
@@ -236,7 +236,6 @@ function loadStatistics(dataObj, settings, chartContext) {
     }
     const ctx = document.getElementById(settings.id);
     if (chartsIds[settings.id]) {
-        console.log("do destroy???")
         chartsIds[settings.id].destroy()
     }
     chartsIds[settings.id] = new Chart(ctx, {
