@@ -200,16 +200,15 @@ function getReturnPolicyAggregation(arr) {
 
 
 
-
+let a = null;
+let b = null
 
 function drawChartReturnPolicy(data) {
-    let inlineChart1 = null
-    loadStatistics(data, { id: "returnPolicyChart", label: "counter" }, inlineChart1)
+    loadStatistics(data, { id: "returnPolicyChart", label: "counter" })
 }
 
 function drawChartBrand(data) {
-    let inlineChart1 = null
-    loadStatistics(data, { id: "brandChart", label: "counter", }, inlineChart1)
+    loadStatistics(data, { id: "brandChart", label: "counter", })
 }
 
 
@@ -225,9 +224,10 @@ function drawChartBrand(data) {
 
 // }
 
-
+const chartsIds = { returnPolicyChart: null, brandChart: null };
 
 function loadStatistics(dataObj, settings, chartContext) {
+
     let labels = []
     let data = []
     for (const property in dataObj) {
@@ -235,10 +235,11 @@ function loadStatistics(dataObj, settings, chartContext) {
         data.push(dataObj[property])
     }
     const ctx = document.getElementById(settings.id);
-    if (chartContext) {
-        chartContext.destroy()
+    if (chartsIds[settings.id]) {
+        console.log("do destroy???")
+        chartsIds[settings.id].destroy()
     }
-    chartContext = new Chart(ctx, {
+    chartsIds[settings.id] = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
