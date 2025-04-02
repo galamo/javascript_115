@@ -11,11 +11,15 @@
 <body>
     <h1> Countries Flags</h1>
     <div style="display: flex;justify-content: center;">
-        <select id="countriesSelect">
+        <select id="countriesSelect" multiple>
             <option value="noValue"> Select Country </option>
         </select>
 
-
+        <div>
+            <button id="getSelectedCountries">
+                Get Selected Countries
+            </button>
+        </div>
     </div>
     <div style="display: flex;justify-content: center;">
         <div id="loader" style="display: none;" class="loading-wave">

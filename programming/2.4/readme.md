@@ -5,3 +5,8 @@
 
 4. for example if we selected: ISR, USA, SWE
 the application will use Promise.all([fetch1,fetch2,fetch3]) with each one of the requests.
+
+
+
+# Ex - 2 
+1. Use the same code to support also failures, in case of failure present the code in box instead

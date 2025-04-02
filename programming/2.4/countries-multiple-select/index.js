@@ -1,25 +1,31 @@
 const DOM = {
     selectCountry: null,
     loader: null,
+    button: null
 }
 
 function init() {
     DOM.selectCountry = document.getElementById("countriesSelect")
     DOM.loader = document.getElementById("loader")
+    DOM.button = document.getElementById("getSelectedCountries")
 
-    DOM.selectCountry.addEventListener("change", async function () {
-        try {
-            showLoader()
-            const c = await getCountryByCode(this.value)
-            if (c) {
-                drawCountryDetails(c)
-            }
-        } catch (error) {
-            console.log(error)
-        } finally {
-            hideLoader()
-        }
+    DOM.button.addEventListener("click", async function () {
+
     })
+
+    // DOM.selectCountry.addEventListener("change", async function () {
+    //     try {
+    //         showLoader()
+    //         const c = await getCountryByCode(this.value)
+    //         if (c) {
+    //             drawCountryDetails(c)
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     } finally {
+    //         hideLoader()
+    //     }
+    // })
     showCountriesNames()
 }
 
