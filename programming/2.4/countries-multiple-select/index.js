@@ -1,17 +1,33 @@
 const DOM = {
     selectCountry: null,
     loader: null,
-    button: null
+    button: null,
+    buttonWithFailure: null
 }
 
 function init() {
     DOM.selectCountry = document.getElementById("countriesSelect")
     DOM.loader = document.getElementById("loader")
     DOM.button = document.getElementById("getSelectedCountries")
+    DOM.buttonWithFailure = document.getElementById("buttonWithFailure")
 
     DOM.button.addEventListener("click", async function () {
+        const codes = Array.from(DOM.selectCountry.selectedOptions).map(optionHTML => optionHTML.value)
+        const promises = codes.map(code => getCountryByCode(code))
+        const results = await Promise.all(promises)
+        results.forEach(country => drawCountryDetails(country))
 
     })
+
+    DOM.buttonWithFailure.addEventListener("click", async function () {
+        const codes = [...Array.from(DOM.selectCountry.selectedOptions).map(optionHTML => optionHTML.value), "NOT_EXISTING_COUNTRY"]
+        const promises = codes.map(code => getCountryByCode(code))
+        const results = await Promise.allSettled(promises)
+        console.log(results)
+        const onlySucceededCountries = results.filter(item => item.status === "fulfilled").map(item => item.value)
+        onlySucceededCountries.forEach(country => drawCountryDetails(country))
+    })
+
 
     // DOM.selectCountry.addEventListener("change", async function () {
     //     try {
@@ -56,6 +72,7 @@ async function getCountriesApi() {
     return data
 }
 async function getCountryByCode(code) {
+    if (code === "NOT_EXISTING_COUNTRY") return Promise.reject("INVALID COUNTRY")
     const result = await fetch(`https://restcountries.com/v3.1/alpha/${code}`)
     const data = await result.json()
     const [firstCountry] = data
@@ -72,7 +89,7 @@ async function getCountryByCode(code) {
 
 function drawCountryDetails(country) {
     const content = document.getElementById("countryDetailsContent")
-    content.innerHTML = `<div>  
+    content.innerHTML += `<div>  
     <h1> ${country.name} </h1>
     <img src=${country.flag} height=200 width=200    />
     </div> 
