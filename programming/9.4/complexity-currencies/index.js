@@ -42,3 +42,14 @@ const popSum = data.reduce(function (sum, c) {
 console.log(popSum.toLocaleString())
 
 //  Write a function which gathers all the capital cities in array
+
+const capitals = data.reduce(function (capitals, c) {
+    if (Array.isArray(c.capital)) {
+        // capitals.push(...c.capital)
+        capitals = [...capitals, ...c.capital]
+    }
+    return capitals;
+}, [])
+console.log(capitals)
+
+//  Write a function that return the number of languages 
